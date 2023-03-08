@@ -1,0 +1,82 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from db.models import Store, Customer, Part
+
+engine = create_engine("sqlite:///p3_project.db")
+Session = sessionmaker(bind=engine)
+session = Session()
+
+def list_customers():
+    customers = session.query(Customer).all()
+    for customer in customers:
+        print(customer)
+
+def add_customer():
+    name = input("Enter customer name: ")
+    budget = int(input("Enter customer budget: "))
+    preference = input("Enter customer preference: ")
+    customer = Customer(name=name, budget=budget, preference=preference)
+    session.add(customer)
+    session.commit()
+    print("Customer added successfully.")
+
+def list_stores():
+    stores = session.query(Store).all()
+    for store in stores:
+        print(store)
+
+def add_store():
+    store_name = input("Enter store name: ")
+    quantity = int(input("Enter store quantity: "))
+    customer_id = int(input("Enter customer ID: "))
+    parts_id = int(input("Enter part ID: "))
+    store = Store(store_name=store_name, quantity=quantity, customer_id=customer_id, parts_id=parts_id)
+    session.add(store)
+    session.commit()
+    print("Store added successfully.")
+
+def list_parts():
+    parts = session.query(Part).all()
+    for part in parts:
+        print(part)
+
+def add_part():
+    part_name = input("Enter part name: ")
+    cost = int(input("Enter part cost: "))
+    brand = input("Enter part brand: ")
+    part = Part(part_name=part_name, cost=cost, brand=brand)
+    session.add(part)
+    session.commit()
+    print("Part added successfully.")
+
+if __name__ == '__main__':
+    print('Welcome to the Parts Inventory CLI!')
+    while True:
+        print("""
+        Please select an option:
+        1. List customers
+        2. Add customer
+        3. List stores
+        4. Add store
+        5. List parts
+        6. Add part
+        7. Quit
+        """)
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            list_customers()
+        elif choice == '2':
+            add_customer()
+        elif choice == '3':
+            list_stores()
+        elif choice == '4':
+            add_store()
+        elif choice == '5':
+            list_parts()
+        elif choice == '6':
+            add_part()
+        elif choice == '7':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+    print('Thanks for using the Parts Inventory CLI!') 
