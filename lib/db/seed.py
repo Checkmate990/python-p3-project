@@ -75,4 +75,7 @@ session.add_all(parts)
 session.commit()
 return customers
 
+if name == "main":
+delete_records()
+create_records()
        
