@@ -49,9 +49,11 @@ class Part(Base):
     id = Column(Integer, primary_key=True)
     part_name = Column(String)
     cost = Column(Integer)
-    brand = Column(Integer)
+    brand = Column(String)
 
     stores = relationship("Store", back_populates="part")
 
     def __repr__(self):
         return f"Part {self.id}: {self.part_name}, Cost: {self.cost}, Brand: {self.brand}"
+
+
