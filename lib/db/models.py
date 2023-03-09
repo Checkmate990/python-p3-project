@@ -56,4 +56,3 @@ class Part(Base):
     def __repr__(self):
         return f"Part {self.id}: {self.part_name}, Cost: {self.cost}, Brand: {self.brand}"
 
-
